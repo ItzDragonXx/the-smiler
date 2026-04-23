@@ -3,9 +3,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         color.startFadeFromCurrent(color.originalPalette, 1000)
         info.changeScoreBy(-1)
         info.startCountdown(10)
-        for (let history_searcher = 0; history_searcher <= 50; history_searcher++) {
-            smiler.follow(me, 50 - history_searcher)
-            eye.follow(me, 150 - 3 * history_searcher)
+        smiler.follow(me, 0)
+        if (eye) {
+            eye.follow(me, 0)
         }
     }
 })
@@ -13,6 +13,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     Render.jump(me)
 })
 controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
+    if (anticheat.length >= 5) {
+        anticheat.shift()
+    }
     anticheat.push(me.tilemapLocation())
 })
 controller.combos.attachCombo("a+b", function () {
@@ -307,9 +310,9 @@ controller.combos.attachCombo("a+b", function () {
 })
 info.onCountdownEnd(function () {
     color.startFadeFromCurrent(color.Arcade, 1000)
-    for (let history_searcher = 0; history_searcher <= 50; history_searcher++) {
-        smiler.follow(me, history_searcher)
-        eye.follow(me, 3 * history_searcher)
+    smiler.follow(me, 50)
+    if (eye) {
+        eye.follow(me, 150)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile17`, function (sprite, location) {
@@ -349,7 +352,7 @@ smiler = sprites.create(img`
     . . . 2 2 . . . . . 2 . . 2 . . 
     . . . . 2 . . . . 2 2 . . 2 . . 
     `, SpriteKind.Enemy)
-let seaker = sprites.create(img`
+let seeker = sprites.create(img`
     1 1 1 1 1 1 1 . . 1 1 1 1 1 1 1 
     2 2 2 2 2 1 1 . . 1 1 2 2 2 2 2 
     . . . . . 1 2 1 1 2 1 . . . . . 
@@ -673,6 +676,8 @@ music.setVolume(50)
 music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 0, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 255, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.LoopingInBackground)
 let sound = 0
+let wasNearInsignia = false
+let lastVolume = -1
 let ball = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -751,7 +756,7 @@ let book = sprites.create(img`
     `, SpriteKind.Text)
 tiles.placeOnRandomTile(book, assets.tile`myTile25`)
 book_level = 0
-let book_not_aloved = sprites.create(img`
+let book_not_allowed = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . 2 . . . . 2 . . . . . 
     . . . . . . 2 . . 2 . . . . . . 
@@ -769,13 +774,13 @@ let book_not_aloved = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Text)
-tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile28`)
+tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile28`)
 anticheat = []
 for (let index = 0; index < 5; index++) {
-    anticheat.push(tiles.getTileLocation(1, 1))
+    anticheat.push(me.tilemapLocation())
 }
 forever(function () {
-    if (me.tileKindAt(TileDirection.Right, assets.tile`myTile`)) {
+    if (level == 1 && me.tileKindAt(TileDirection.Right, assets.tile`myTile`)) {
         color.setPalette(
         color.Black
         )
@@ -951,7 +956,7 @@ forever(function () {
         game.showLongText("LEVEL II - stiskni A", DialogLayout.Full)
         color.startFade(color.Black, color.Arcade, 2000)
     }
-    if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile3`)) {
+    if (level == 2 && me.tileKindAt(TileDirection.Bottom, assets.tile`myTile3`)) {
         color.setPalette(
         color.Black
         )
@@ -981,7 +986,7 @@ forever(function () {
         game.showLongText("LEVEL III - stiskni A", DialogLayout.Full)
         color.startFade(color.Black, color.Arcade, 2000)
     }
-    if (me.tileKindAt(TileDirection.Left, assets.tile`myTile16`)) {
+    if (level == 3 && me.tileKindAt(TileDirection.Left, assets.tile`myTile16`)) {
         color.setPalette(
         color.Black
         )
@@ -997,7 +1002,7 @@ forever(function () {
         game.showLongText("LEVEL IV - stiskni A", DialogLayout.Full)
         color.startFade(color.Black, color.Arcade, 2000)
     }
-    if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
+    if (level == 4 && me.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
         info.stopCountdown()
         smiler.follow(me, 50)
         music.stopAllSounds()
@@ -1033,10 +1038,10 @@ forever(function () {
         pause(5000)
         tiles.placeOnTile(smiler, tiles.getTileLocation(10, 65))
     }
-    if (!(Math.abs(me.tilemapLocation().column - seaker.tilemapLocation().column) < 8 && Math.abs(me.tilemapLocation().row - seaker.tilemapLocation().row) < 8)) {
-        tiles.placeOnRandomTile(seaker, assets.tile`transparency16`)
+    if (!(Math.abs(me.tilemapLocation().column - seeker.tilemapLocation().column) < 8 && Math.abs(me.tilemapLocation().row - seeker.tilemapLocation().row) < 8)) {
+        tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
     }
-    if (me.overlapsWith(seaker)) {
+    if (me.overlapsWith(seeker)) {
         music.setVolume(255)
         Render.moveWithController(0, 0, 0)
         color.RotatePalette.startScreenEffect(1000)
@@ -1069,7 +1074,7 @@ forever(function () {
         color.Arcade
         )
         Render.moveWithController(3, 5, 0)
-        tiles.placeOnRandomTile(seaker, assets.tile`transparency16`)
+        tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
     }
     if (ball.tilemapLocation().row == 39) {
         tiles.placeOnTile(ball, tiles.getTileLocation(30 + randint(3, 5) * 2, 35))
@@ -1077,64 +1082,64 @@ forever(function () {
     }
     if (me.tileKindAt(TileDirection.Right, assets.tile`myTile4`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length)
+        random = randint(0, col.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
         Render.setViewAngleInDegree(ang[random])
     } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile4`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length)
+        random = randint(0, col.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
         Render.setViewAngleInDegree(ang[random])
     } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length)
+        random = randint(0, col.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
         Render.setViewAngleInDegree(ang[random])
     } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile4`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length)
+        random = randint(0, col.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
         Render.setViewAngleInDegree(ang[random])
     }
     if (me.tileKindAt(TileDirection.Right, assets.tile`myTile12`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length)
+        random = randint(0, col2.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
         Render.setViewAngleInDegree(ang2[random])
     } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile12`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length)
+        random = randint(0, col2.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
         Render.setViewAngleInDegree(ang2[random])
     } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile12`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length)
+        random = randint(0, col2.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
         Render.setViewAngleInDegree(ang2[random])
     } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile12`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length)
+        random = randint(0, col2.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
         Render.setViewAngleInDegree(ang2[random])
     }
     if (me.tileKindAt(TileDirection.Right, assets.tile`myTile22`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length)
+        random = randint(0, col3.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
         Render.setViewAngleInDegree(ang3[random])
     } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile22`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length)
+        random = randint(0, col3.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
         Render.setViewAngleInDegree(ang3[random])
     } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile22`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length)
+        random = randint(0, col3.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
         Render.setViewAngleInDegree(ang3[random])
     } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile22`)) {
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length)
+        random = randint(0, col3.length - 1)
         tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
         Render.setViewAngleInDegree(ang3[random])
     }
@@ -1253,7 +1258,9 @@ forever(function () {
         }
     }
     if (tiles.tileAtLocationIsWall(me.tilemapLocation())) {
-        tiles.placeOnTile(me, anticheat[1])
+        if (anticheat.length > 0) {
+            tiles.placeOnTile(me, anticheat[anticheat.length - 1])
+        }
     }
     if (me.overlapsWith(book)) {
         music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.InBackground)
@@ -1380,7 +1387,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile28`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile29`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile29`)
         } else if (book_level == 1) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1421,7 +1428,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile29`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile30`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile30`)
         } else if (book_level == 2) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1462,7 +1469,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile30`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile33`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile33`)
         } else if (book_level == 3) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1503,7 +1510,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile31`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile32`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile32`)
         } else if (book_level == 4) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1544,7 +1551,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile32`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile33`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile33`)
         } else if (book_level == 5) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1585,7 +1592,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile33`)
-            tiles.placeOnRandomTile(book_not_aloved, assets.tile`myTile34`)
+            tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile34`)
         } else if (book_level == 6) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1626,7 +1633,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 `)
             tiles.placeOnRandomTile(book, assets.tile`myTile34`)
-            sprites.destroy(book_not_aloved)
+            sprites.destroy(book_not_allowed)
         } else if (book_level == 7) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1687,27 +1694,18 @@ forever(function () {
             `)
         game.setDialogTextColor(1)
     }
-    if (me.overlapsWith(book_not_aloved)) {
-        game.splash("You can't take this book, you don't have the previous one.")
+    if (me.overlapsWith(book_not_allowed)) {
+        game.splash("Tuto knihu nemůžeš vzít, nemáš předchozí.")
         pause(500)
     }
-    if (me.tileKindAt(TileDirection.Left, sprites.dungeon.collectibleInsignia)) {
-        music.setVolume(255)
-        music.play(music.randomizeSound(music.createSoundEffect(WaveShape.Noise, 2655, 2620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear)), music.PlaybackMode.UntilDone)
-        music.setVolume(50)
-    } else if (me.tileKindAt(TileDirection.Top, sprites.dungeon.collectibleInsignia)) {
-        music.setVolume(255)
-        music.play(music.randomizeSound(music.createSoundEffect(WaveShape.Noise, 2655, 2620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear)), music.PlaybackMode.UntilDone)
-        music.setVolume(50)
-    } else if (me.tileKindAt(TileDirection.Right, sprites.dungeon.collectibleInsignia)) {
-        music.setVolume(255)
-        music.play(music.randomizeSound(music.createSoundEffect(WaveShape.Noise, 2655, 2620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear)), music.PlaybackMode.UntilDone)
-        music.setVolume(50)
-    } else if (me.tileKindAt(TileDirection.Bottom, sprites.dungeon.collectibleInsignia)) {
-        music.setVolume(255)
-        music.play(music.randomizeSound(music.createSoundEffect(WaveShape.Noise, 2655, 2620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear)), music.PlaybackMode.UntilDone)
-        music.setVolume(50)
+    let nearInsignia = me.tileKindAt(TileDirection.Left, sprites.dungeon.collectibleInsignia) ||
+        me.tileKindAt(TileDirection.Right, sprites.dungeon.collectibleInsignia) ||
+        me.tileKindAt(TileDirection.Top, sprites.dungeon.collectibleInsignia) ||
+        me.tileKindAt(TileDirection.Bottom, sprites.dungeon.collectibleInsignia)
+    if (nearInsignia && !wasNearInsignia) {
+        music.play(music.randomizeSound(music.createSoundEffect(WaveShape.Noise, 2655, 2620, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear)), music.PlaybackMode.InBackground)
     }
+    wasNearInsignia = nearInsignia
     if (level == 3) {
         if (me.overlapsWith(potion)) {
             info.changeScoreBy(1)
@@ -1722,13 +1720,12 @@ forever(function () {
         }
     }
     if (sound == 0) {
-        if (Math.map(Math.abs(smiler.tilemapLocation().column - me.tilemapLocation().column), 0, 16, 0, 255) > Math.map(Math.abs(smiler.tilemapLocation().row - me.tilemapLocation().row), 0, 16, 0, 255)) {
-            music.setVolume(255 - Math.map(Math.abs(smiler.tilemapLocation().column - me.tilemapLocation().column), 0, 16, 0, 255))
-        } else {
-            music.setVolume(255 - Math.map(Math.abs(smiler.tilemapLocation().row - me.tilemapLocation().row), 0, 16, 0, 255))
+        let dCol = Math.abs(smiler.tilemapLocation().column - me.tilemapLocation().column)
+        let dRow = Math.abs(smiler.tilemapLocation().row - me.tilemapLocation().row)
+        let proxVolume = 255 - Math.map(Math.max(dCol, dRow), 0, 16, 0, 255)
+        if (proxVolume != lastVolume) {
+            music.setVolume(proxVolume)
+            lastVolume = proxVolume
         }
-    }
-    if (anticheat.length >= 5) {
-        anticheat.shift()
     }
 })
