@@ -670,10 +670,10 @@ game.setDialogFrame(img`
     f f f f f f f f f f f f f f f 
     f f f f f f f f f f f f f f f 
     `)
-game.showLongText("Ahoj, vítej v mé hře! Hra se ovládá joystickem nebo klávesami W, A, D, S. Najdi vítězný blok a projdi bludištěm živý. Mezerník = spuštění hry", DialogLayout.Full)
+game.showLongText("Ahoj, vítej v mé hře! Ovládání: joystick nebo klávesy W/A/S/D (na telefonu dotykový joystick). Šipka NAHORU = vpřed, DOLŮ = vzad, vlevo/vpravo = otočit. Tlačítko A = skok, B = zahnat příšery (potřebuješ skóre). Najdi vítězný blok a projdi bludištěm živý. A / mezerník = pokračovat", DialogLayout.Full)
 color.startFade(color.Black, color.Arcade, 2000)
 music.setVolume(50)
-music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 0, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 0, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
 music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 255, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.LoopingInBackground)
 let sound = 0
 let wasNearInsignia = false
@@ -1033,7 +1033,7 @@ forever(function () {
         color.startFadeFromCurrent(color.Arcade, 3000)
         sound = 1
         music.setVolume(255)
-        music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 0, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 0, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 255, 255, 5000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.LoopingInBackground)
         pause(5000)
         tiles.placeOnTile(smiler, tiles.getTileLocation(10, 65))
@@ -1045,7 +1045,7 @@ forever(function () {
         music.setVolume(255)
         Render.moveWithController(0, 0, 0)
         color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.setVolume(50)
         game.showLongText("GAME OVER", DialogLayout.Full)
@@ -1073,7 +1073,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 5, 0)
+        Render.moveWithController(3, 4, 0)
         tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
     }
     if (ball.tilemapLocation().row == 39) {
@@ -1147,7 +1147,7 @@ forever(function () {
         music.setVolume(255)
         Render.moveWithController(0, 0, 0)
         color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         if (level == 5) {
             music.stopAllSounds()
@@ -1212,7 +1212,7 @@ forever(function () {
         music.setVolume(255)
         Render.moveWithController(0, 0, 0)
         color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
         game.showLongText("GAME OVER", DialogLayout.Full)
         music.setVolume(50)
@@ -1231,7 +1231,7 @@ forever(function () {
             music.setVolume(255)
             Render.moveWithController(0, 0, 0)
             color.RotatePalette.startScreenEffect(1000)
-            music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+            music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
             music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
             game.showLongText("GAME OVER", DialogLayout.Full)
             music.setVolume(50)
