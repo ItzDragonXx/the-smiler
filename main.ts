@@ -678,6 +678,8 @@ music.play(music.createSoundEffect(WaveShape.Noise, 446, 446, 255, 255, 5000, So
 let sound = 0
 let wasNearInsignia = false
 let lastVolume = -1
+let potionGraceUntil = 0
+let potion2: Sprite = null
 let ball = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -778,6 +780,27 @@ tiles.placeOnRandomTile(book_not_allowed, assets.tile`myTile28`)
 anticheat = []
 for (let index = 0; index < 5; index++) {
     anticheat.push(me.tilemapLocation())
+}
+function nearGoal(): boolean {
+    let goal: Image = null
+    if (level == 1) {
+        goal = assets.tile`myTile`
+    } else if (level == 2) {
+        goal = assets.tile`myTile3`
+    } else if (level == 3) {
+        goal = assets.tile`myTile16`
+    } else if (level == 4) {
+        goal = assets.tile`myTile20`
+    } else {
+        return false
+    }
+    return me.tileKindAt(TileDirection.Right, goal) ||
+        me.tileKindAt(TileDirection.Left, goal) ||
+        me.tileKindAt(TileDirection.Top, goal) ||
+        me.tileKindAt(TileDirection.Bottom, goal)
+}
+function teleportSafe(): boolean {
+    return game.runtime() >= potionGraceUntil && !nearGoal()
 }
 forever(function () {
     if (level == 1 && me.tileKindAt(TileDirection.Right, assets.tile`myTile`)) {
@@ -978,6 +1001,21 @@ forever(function () {
             8 6 6 . . . 
             `, SpriteKind.Food)
         tiles.placeOnRandomTile(potion, assets.tile`myTile11`)
+        potion2 = sprites.create(img`
+            . . . . . .
+            . . . . . .
+            . . . . . .
+            . . . . . .
+            . . . . . .
+            . . . . . .
+            . . . . . .
+            8 8 8 . . .
+            . 8 . . . .
+            9 8 8 . . .
+            8 8 6 . . .
+            8 6 6 . . .
+            `, SpriteKind.Food)
+        tiles.placeOnRandomTile(potion2, assets.tile`myTile11`)
         level = 3
         Render.setViewAngleInDegree(270)
         color.setPalette(
@@ -994,6 +1032,10 @@ forever(function () {
         tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
         tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
         tiles.placeOnRandomTile(potion, assets.tile`myTile21`)
+        if (potion2) {
+            sprites.destroy(potion2)
+            potion2 = null
+        }
         level = 4
         Render.setViewAngleInDegree(90)
         color.setPalette(
@@ -1038,8 +1080,12 @@ forever(function () {
         pause(5000)
         tiles.placeOnTile(smiler, tiles.getTileLocation(10, 65))
     }
-    if (!(Math.abs(me.tilemapLocation().column - seeker.tilemapLocation().column) < 8 && Math.abs(me.tilemapLocation().row - seeker.tilemapLocation().row) < 8)) {
-        tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
+    if (teleportSafe()) {
+        let myLoc = me.tilemapLocation()
+        let sLoc = seeker.tilemapLocation()
+        if (!(Math.abs(myLoc.column - sLoc.column) < 8 && Math.abs(myLoc.row - sLoc.row) < 8)) {
+            tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
+        }
     }
     if (me.overlapsWith(seeker)) {
         music.setVolume(255)
@@ -1076,72 +1122,36 @@ forever(function () {
         Render.moveWithController(3, 4, 0)
         tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
     }
-    if (ball.tilemapLocation().row == 39) {
+    if (level == 4 && ball.tilemapLocation().row == 39) {
         tiles.placeOnTile(ball, tiles.getTileLocation(30 + randint(3, 5) * 2, 35))
         ball.vy = 100
     }
-    if (me.tileKindAt(TileDirection.Right, assets.tile`myTile4`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
-        Render.setViewAngleInDegree(ang[random])
-    } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile4`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
-        Render.setViewAngleInDegree(ang[random])
-    } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
-        Render.setViewAngleInDegree(ang[random])
-    } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile4`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
-        Render.setViewAngleInDegree(ang[random])
-    }
-    if (me.tileKindAt(TileDirection.Right, assets.tile`myTile12`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
-        Render.setViewAngleInDegree(ang2[random])
-    } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile12`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
-        Render.setViewAngleInDegree(ang2[random])
-    } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile12`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
-        Render.setViewAngleInDegree(ang2[random])
-    } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile12`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col2.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
-        Render.setViewAngleInDegree(ang2[random])
-    }
-    if (me.tileKindAt(TileDirection.Right, assets.tile`myTile22`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
-        Render.setViewAngleInDegree(ang3[random])
-    } else if (me.tileKindAt(TileDirection.Left, assets.tile`myTile22`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
-        Render.setViewAngleInDegree(ang3[random])
-    } else if (me.tileKindAt(TileDirection.Top, assets.tile`myTile22`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
-        Render.setViewAngleInDegree(ang3[random])
-    } else if (me.tileKindAt(TileDirection.Bottom, assets.tile`myTile22`)) {
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        random = randint(0, col3.length - 1)
-        tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
-        Render.setViewAngleInDegree(ang3[random])
+    if (teleportSafe()) {
+        let tp4 = assets.tile`myTile4`
+        let tp12 = assets.tile`myTile12`
+        let tp22 = assets.tile`myTile22`
+        let hit4 = me.tileKindAt(TileDirection.Right, tp4) || me.tileKindAt(TileDirection.Left, tp4) ||
+            me.tileKindAt(TileDirection.Top, tp4) || me.tileKindAt(TileDirection.Bottom, tp4)
+        let hit12 = me.tileKindAt(TileDirection.Right, tp12) || me.tileKindAt(TileDirection.Left, tp12) ||
+            me.tileKindAt(TileDirection.Top, tp12) || me.tileKindAt(TileDirection.Bottom, tp12)
+        let hit22 = me.tileKindAt(TileDirection.Right, tp22) || me.tileKindAt(TileDirection.Left, tp22) ||
+            me.tileKindAt(TileDirection.Top, tp22) || me.tileKindAt(TileDirection.Bottom, tp22)
+        if (hit4) {
+            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            random = randint(0, col.length - 1)
+            tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
+            Render.setViewAngleInDegree(ang[random])
+        } else if (hit12) {
+            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            random = randint(0, col2.length - 1)
+            tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
+            Render.setViewAngleInDegree(ang2[random])
+        } else if (hit22) {
+            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            random = randint(0, col3.length - 1)
+            tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
+            Render.setViewAngleInDegree(ang3[random])
+        }
     }
     if (me.overlapsWith(smiler)) {
         music.setVolume(255)
@@ -1711,17 +1721,27 @@ forever(function () {
             info.changeScoreBy(1)
             tiles.placeOnRandomTile(potion, assets.tile`myTile11`)
             music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+            potionGraceUntil = game.runtime() + 8000
+        }
+        if (potion2 && me.overlapsWith(potion2)) {
+            info.changeScoreBy(1)
+            tiles.placeOnRandomTile(potion2, assets.tile`myTile11`)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+            potionGraceUntil = game.runtime() + 8000
         }
     } else if (level == 4) {
         if (me.overlapsWith(potion)) {
             info.changeScoreBy(1)
             tiles.placeOnRandomTile(potion, assets.tile`myTile21`)
             music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+            potionGraceUntil = game.runtime() + 8000
         }
     }
     if (sound == 0) {
-        let dCol = Math.abs(smiler.tilemapLocation().column - me.tilemapLocation().column)
-        let dRow = Math.abs(smiler.tilemapLocation().row - me.tilemapLocation().row)
+        let myLoc = me.tilemapLocation()
+        let smLoc = smiler.tilemapLocation()
+        let dCol = Math.abs(smLoc.column - myLoc.column)
+        let dRow = Math.abs(smLoc.row - myLoc.row)
         let proxVolume = 255 - Math.map(Math.max(dCol, dRow), 0, 16, 0, 255)
         if (proxVolume != lastVolume) {
             music.setVolume(proxVolume)
