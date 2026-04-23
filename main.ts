@@ -802,6 +802,46 @@ function nearGoal(): boolean {
 function teleportSafe(): boolean {
     return game.runtime() >= potionGraceUntil && !nearGoal()
 }
+function goalTileForLevel(): Image {
+    if (level == 1) {
+        return assets.tile`myTile`
+    } else if (level == 2) {
+        return assets.tile`myTile3`
+    } else if (level == 3) {
+        return assets.tile`myTile16`
+    } else if (level == 4) {
+        return assets.tile`myTile20`
+    }
+    return null
+}
+function seekerNearGoal(): boolean {
+    let goal = goalTileForLevel()
+    if (!goal) {
+        return false
+    }
+    return seeker.tileKindAt(TileDirection.Right, goal) ||
+        seeker.tileKindAt(TileDirection.Left, goal) ||
+        seeker.tileKindAt(TileDirection.Top, goal) ||
+        seeker.tileKindAt(TileDirection.Bottom, goal)
+}
+function teleportSeekerSafely(): void {
+    let myLoc = me.tilemapLocation()
+    let fallback: tiles.Location = null
+    for (let attempt = 0; attempt < 30; attempt++) {
+        tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
+        let sLoc = seeker.tilemapLocation()
+        let dist = Math.max(Math.abs(sLoc.column - myLoc.column), Math.abs(sLoc.row - myLoc.row))
+        if (dist >= 6 && !seekerNearGoal()) {
+            if (dist <= 12) {
+                return
+            }
+            fallback = sLoc
+        }
+    }
+    if (fallback) {
+        tiles.placeOnTile(seeker, fallback)
+    }
+}
 forever(function () {
     if (level == 1 && me.tileKindAt(TileDirection.Right, assets.tile`myTile`)) {
         color.setPalette(
@@ -1083,8 +1123,9 @@ forever(function () {
     if (teleportSafe()) {
         let myLoc = me.tilemapLocation()
         let sLoc = seeker.tilemapLocation()
-        if (!(Math.abs(myLoc.column - sLoc.column) < 8 && Math.abs(myLoc.row - sLoc.row) < 8)) {
-            tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
+        let dist = Math.max(Math.abs(myLoc.column - sLoc.column), Math.abs(myLoc.row - sLoc.row))
+        if (dist >= 8 || dist <= 5 || seekerNearGoal()) {
+            teleportSeekerSafely()
         }
     }
     if (me.overlapsWith(seeker)) {
@@ -1120,7 +1161,7 @@ forever(function () {
         color.Arcade
         )
         Render.moveWithController(3, 4, 0)
-        tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
+        teleportSeekerSafely()
     }
     if (level == 4 && ball.tilemapLocation().row == 39) {
         tiles.placeOnTile(ball, tiles.getTileLocation(30 + randint(3, 5) * 2, 35))
