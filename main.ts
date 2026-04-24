@@ -46,12 +46,15 @@ browserEvents.MouseAny.onEvent(browserEvents.MouseButtonEvent.Released, function
 })
 let mouseTurnEnabled = true
 let lastMouseX = -9999
-let rotationSpeed = 0.35
-const rotationSpeedMin = 0.05
-const rotationSpeedMax = 2
-const rotationSpeedStep = 0.1
-function adjustRotationSpeed(delta: number) {
-    rotationSpeed = Math.max(rotationSpeedMin, Math.min(rotationSpeedMax, rotationSpeed + delta))
+let rotationSpeed = 4
+const rotationSpeedMin = 1
+const rotationSpeedMax = 10
+function applyRotationSpeed() {
+    Render.moveWithController(3, rotationSpeed, 0)
+}
+function setRotationSpeed(value: number) {
+    rotationSpeed = Math.max(rotationSpeedMin, Math.min(rotationSpeedMax, value))
+    applyRotationSpeed()
     game.splash("Rotation speed", rotationSpeed.toString())
 }
 browserEvents.onMouseMove(function (x: number, y: number) {
@@ -65,7 +68,7 @@ browserEvents.onMouseMove(function (x: number, y: number) {
             const dirX = Render.getAttribute(Render.attribute.dirX)
             const dirY = Render.getAttribute(Render.attribute.dirY)
             const currentDeg = Math.atan2(dirY, dirX) * 180 / Math.PI
-            Render.setViewAngleInDegree(currentDeg + dx * rotationSpeed)
+            Render.setViewAngleInDegree(currentDeg + dx * rotationSpeed * 0.1)
         }
     }
     lastMouseX = x
@@ -75,10 +78,14 @@ browserEvents.M.onEvent(browserEvents.KeyEvent.Pressed, function () {
     game.splash(mouseTurnEnabled ? "Mouse turn: ON" : "Mouse turn: OFF")
 })
 browserEvents.Equals.onEvent(browserEvents.KeyEvent.Pressed, function () {
-    adjustRotationSpeed(rotationSpeedStep)
+    setRotationSpeed(rotationSpeed + 1)
 })
 browserEvents.Hyphen.onEvent(browserEvents.KeyEvent.Pressed, function () {
-    adjustRotationSpeed(-rotationSpeedStep)
+    setRotationSpeed(rotationSpeed - 1)
+})
+controller.combos.attachCombo("up+down", function () {
+    pause(200)
+    setRotationSpeed(game.askForNumber("Rotation speed 1-10", 2))
 })
 controller.combos.attachCombo("a+b", function () {
     pause(200)
@@ -586,7 +593,7 @@ Render.setSpriteAnimations(smiler, Render.createAnimations(50, [img`
     . . . 2 2 . . . . . 2 . . 2 . . 
     . . . . 2 . . . . 2 2 . . 2 . . 
     `]))
-Render.moveWithController(3, 4, 0)
+Render.moveWithController(3, rotationSpeed, 0)
 tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
 smiler.follow(me, 50)
 let col = [
@@ -1181,7 +1188,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, rotationSpeed, 0)
         tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
     }
     if (level == 4 && ball.tilemapLocation().row == 39) {
@@ -1278,7 +1285,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, rotationSpeed, 0)
     }
     if (me.overlapsWith(ball)) {
         music.setVolume(255)
@@ -1296,7 +1303,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, rotationSpeed, 0)
     }
     if (level >= 2 && level < 5) {
         if (me.overlapsWith(eye)) {
@@ -1326,7 +1333,7 @@ forever(function () {
             color.setPalette(
             color.Arcade
             )
-            Render.moveWithController(3, 4, 0)
+            Render.moveWithController(3, rotationSpeed, 0)
         }
     }
     if (tiles.tileAtLocationIsWall(me.tilemapLocation())) {
