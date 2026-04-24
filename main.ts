@@ -46,7 +46,14 @@ browserEvents.MouseAny.onEvent(browserEvents.MouseButtonEvent.Released, function
 })
 let mouseTurnEnabled = true
 let lastMouseX = -9999
-const mouseTurnSensitivity = 0.35
+let rotationSpeed = 0.35
+const rotationSpeedMin = 0.05
+const rotationSpeedMax = 2
+const rotationSpeedStep = 0.1
+function adjustRotationSpeed(delta: number) {
+    rotationSpeed = Math.max(rotationSpeedMin, Math.min(rotationSpeedMax, rotationSpeed + delta))
+    game.splash("Rotation speed", rotationSpeed.toString())
+}
 browserEvents.onMouseMove(function (x: number, y: number) {
     if (!mouseTurnEnabled) {
         lastMouseX = x
@@ -58,7 +65,7 @@ browserEvents.onMouseMove(function (x: number, y: number) {
             const dirX = Render.getAttribute(Render.attribute.dirX)
             const dirY = Render.getAttribute(Render.attribute.dirY)
             const currentDeg = Math.atan2(dirY, dirX) * 180 / Math.PI
-            Render.setViewAngleInDegree(currentDeg + dx * mouseTurnSensitivity)
+            Render.setViewAngleInDegree(currentDeg + dx * rotationSpeed)
         }
     }
     lastMouseX = x
@@ -66,6 +73,12 @@ browserEvents.onMouseMove(function (x: number, y: number) {
 browserEvents.M.onEvent(browserEvents.KeyEvent.Pressed, function () {
     mouseTurnEnabled = !mouseTurnEnabled
     game.splash(mouseTurnEnabled ? "Mouse turn: ON" : "Mouse turn: OFF")
+})
+browserEvents.Equals.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    adjustRotationSpeed(rotationSpeedStep)
+})
+browserEvents.Hyphen.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    adjustRotationSpeed(-rotationSpeedStep)
 })
 controller.combos.attachCombo("a+b", function () {
     pause(200)
