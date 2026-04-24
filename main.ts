@@ -680,6 +680,7 @@ let wasNearInsignia = false
 let lastVolume = -1
 let potionGraceUntil = 0
 let potion2: Sprite = null
+let potions: Sprite[] = []
 let ball = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -826,20 +827,28 @@ function seekerNearGoal(): boolean {
 }
 function teleportSeekerSafely(): void {
     let myLoc = me.tilemapLocation()
-    let fallback: tiles.Location = null
+    let nearFallback: tiles.Location = null
+    let minFallback: tiles.Location = null
     for (let attempt = 0; attempt < 30; attempt++) {
         tiles.placeOnRandomTile(seeker, assets.tile`transparency16`)
         let sLoc = seeker.tilemapLocation()
         let dist = Math.max(Math.abs(sLoc.column - myLoc.column), Math.abs(sLoc.row - myLoc.row))
-        if (dist >= 6 && !seekerNearGoal()) {
-            if (dist <= 12) {
-                return
-            }
-            fallback = sLoc
+        if (dist < 2 || seekerNearGoal()) {
+            continue
+        }
+        if (dist >= 6 && dist <= 12) {
+            return
+        }
+        if (dist >= 6) {
+            nearFallback = sLoc
+        } else {
+            minFallback = sLoc
         }
     }
-    if (fallback) {
-        tiles.placeOnTile(seeker, fallback)
+    if (nearFallback) {
+        tiles.placeOnTile(seeker, nearFallback)
+    } else if (minFallback) {
+        tiles.placeOnTile(seeker, minFallback)
     }
 }
 forever(function () {
@@ -1071,10 +1080,32 @@ forever(function () {
         tiles.placeOnTile(smiler, tiles.getTileLocation(60, 53))
         tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
         tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
-        tiles.placeOnRandomTile(potion, assets.tile`myTile21`)
+        if (potion) {
+            sprites.destroy(potion)
+            potion = null
+        }
         if (potion2) {
             sprites.destroy(potion2)
             potion2 = null
+        }
+        let potionLocs = tiles.getTilesByType(assets.tile`myTile21`)
+        for (let pi = 0; pi < potionLocs.length; pi++) {
+            let p = sprites.create(img`
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                8 8 8 . . .
+                . 8 . . . .
+                9 8 8 . . .
+                8 8 6 . . .
+                8 6 6 . . .
+                `, SpriteKind.Food)
+            tiles.placeOnTile(p, potionLocs[pi])
+            potions.push(p)
         }
         level = 4
         Render.setViewAngleInDegree(90)
@@ -1157,6 +1188,7 @@ forever(function () {
             tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
             Render.setViewAngleInDegree(90)
         }
+        color.RotatePalette.stop()
         color.setPalette(
         color.Arcade
         )
@@ -1203,6 +1235,7 @@ forever(function () {
         if (level == 5) {
             music.stopAllSounds()
             pause(500)
+            color.RotatePalette.stop()
             color.setPalette(
             color.Arcade
             )
@@ -1254,6 +1287,7 @@ forever(function () {
             tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
             Render.setViewAngleInDegree(90)
         }
+        color.RotatePalette.stop()
         color.setPalette(
         color.Arcade
         )
@@ -1272,6 +1306,7 @@ forever(function () {
         tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
         info.setScore(0)
         Render.setViewAngleInDegree(90)
+        color.RotatePalette.stop()
         color.setPalette(
         color.Arcade
         )
@@ -1302,6 +1337,7 @@ forever(function () {
                 tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
                 Render.setViewAngleInDegree(90)
             }
+            color.RotatePalette.stop()
             color.setPalette(
             color.Arcade
             )
@@ -1771,11 +1807,14 @@ forever(function () {
             potionGraceUntil = game.runtime() + 8000
         }
     } else if (level == 4) {
-        if (me.overlapsWith(potion)) {
-            info.changeScoreBy(1)
-            tiles.placeOnRandomTile(potion, assets.tile`myTile21`)
-            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
-            potionGraceUntil = game.runtime() + 8000
+        for (let pi = potions.length - 1; pi >= 0; pi--) {
+            if (me.overlapsWith(potions[pi])) {
+                info.changeScoreBy(1)
+                sprites.destroy(potions[pi])
+                potions.splice(pi, 1)
+                music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
+                potionGraceUntil = game.runtime() + 8000
+            }
         }
     }
     if (sound == 0) {
