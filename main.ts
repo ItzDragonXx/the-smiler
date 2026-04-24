@@ -1,4 +1,5 @@
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+function usePotion() {
+    if (!smiler || !me) return
     if (info.score() > 0) {
         color.startFadeFromCurrent(color.originalPalette, 1000)
         info.changeScoreBy(-1)
@@ -8,15 +9,40 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             eye.follow(me, 0)
         }
     }
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    Render.jump(me)
-})
-controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
+}
+function recordLocation() {
+    if (!me) return
     if (anticheat.length >= 5) {
         anticheat.shift()
     }
     anticheat.push(me.tilemapLocation())
+}
+function doJump() {
+    if (me) Render.jump(me)
+}
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    usePotion()
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    doJump()
+})
+controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
+    recordLocation()
+})
+browserEvents.E.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    doJump()
+})
+browserEvents.F.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    usePotion()
+})
+browserEvents.MouseLeft.onEvent(browserEvents.MouseButtonEvent.Pressed, function () {
+    doJump()
+})
+browserEvents.MouseRight.onEvent(browserEvents.MouseButtonEvent.Pressed, function () {
+    usePotion()
+})
+browserEvents.MouseAny.onEvent(browserEvents.MouseButtonEvent.Released, function () {
+    recordLocation()
 })
 controller.combos.attachCombo("a+b", function () {
     pause(200)
