@@ -525,6 +525,8 @@ Render.setSpriteAnimations(smiler, Render.createAnimations(50, [img`
     . . . . 2 . . . . 2 2 . . 2 . . 
     `]))
 Render.moveWithController(3, 2, 0)
+game.consoleOverlay.setVisible(true)
+console.log("RAM size: " + control.ramSize() + " B")
 tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
 smiler.follow(me, 50)
 let col = [
@@ -1089,6 +1091,7 @@ forever(function () {
             potion2 = null
         }
         let potionLocs = tiles.getTilesByType(assets.tile`myTile21`)
+        console.log("L4 potion tiles available: " + potionLocs.length)
         while (potionLocs.length > 6) {
             potionLocs.splice(randint(0, potionLocs.length - 1), 1)
         }
@@ -1110,6 +1113,7 @@ forever(function () {
             tiles.placeOnTile(p, potionLocs[pi])
             potions.push(p)
         }
+        console.log("L4 potions: " + potions.length + " sprites: " + sprites.allOfKind(SpriteKind.Food).length)
         level = 4
         Render.setViewAngleInDegree(90)
         color.setPalette(
