@@ -524,7 +524,7 @@ Render.setSpriteAnimations(smiler, Render.createAnimations(50, [img`
     . . . 2 2 . . . . . 2 . . 2 . . 
     . . . . 2 . . . . 2 2 . . 2 . . 
     `]))
-Render.moveWithController(3, 4, 0)
+Render.moveWithController(3, 2, 0)
 tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
 smiler.follow(me, 50)
 let col = [
@@ -1192,7 +1192,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, 2, 0)
         teleportSeekerSafely()
     }
     if (level == 4 && ball.tilemapLocation().row == 39) {
@@ -1291,7 +1291,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, 2, 0)
     }
     if (me.overlapsWith(ball)) {
         music.setVolume(255)
@@ -1310,7 +1310,7 @@ forever(function () {
         color.setPalette(
         color.Arcade
         )
-        Render.moveWithController(3, 4, 0)
+        Render.moveWithController(3, 2, 0)
     }
     if (level >= 2 && level < 5) {
         if (me.overlapsWith(eye)) {
@@ -1341,7 +1341,7 @@ forever(function () {
             color.setPalette(
             color.Arcade
             )
-            Render.moveWithController(3, 4, 0)
+            Render.moveWithController(3, 2, 0)
         }
     }
     if (tiles.tileAtLocationIsWall(me.tilemapLocation())) {
