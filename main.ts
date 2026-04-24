@@ -10,20 +10,6 @@ function usePotion() {
         }
     }
 }
-let multiplayer = false
-function setSmilerChaseSpeed(speed: number) {
-    if (!smiler || !me) return
-    if (multiplayer) {
-        smiler.follow(me, 0)
-    } else {
-        smiler.follow(me, speed)
-    }
-}
-function enableMultiplayerControls() {
-    if (!smiler) return
-    smiler.follow(me, 0)
-    controller.player2.moveSprite(smiler, 60, 60)
-}
 function recordLocation() {
     if (!me) return
     if (anticheat.length >= 5) {
@@ -373,7 +359,7 @@ controller.combos.attachCombo("a+b", function () {
 })
 info.onCountdownEnd(function () {
     color.startFadeFromCurrent(color.Arcade, 1000)
-    setSmilerChaseSpeed(50)
+    smiler.follow(me, 50)
     if (eye) {
         eye.follow(me, 150)
     }
@@ -589,13 +575,7 @@ Render.setSpriteAnimations(smiler, Render.createAnimations(50, [img`
     `]))
 Render.moveWithController(3, 4, 0)
 tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
-multiplayer = game.ask("Multiplayer?", "P2 = Smiler (ESDF)")
-if (multiplayer) {
-    enableMultiplayerControls()
-    game.splash("Multiplayer ON", "P2 controls the Smiler")
-} else {
-    smiler.follow(me, 50)
-}
+smiler.follow(me, 50)
 let col = [
 13,
 18,
@@ -1115,7 +1095,7 @@ forever(function () {
     }
     if (level == 4 && me.tileKindAt(TileDirection.Bottom, assets.tile`myTile20`)) {
         info.stopCountdown()
-        setSmilerChaseSpeed(50)
+        smiler.follow(me, 50)
         music.stopAllSounds()
         color.setPalette(
         color.Arcade
