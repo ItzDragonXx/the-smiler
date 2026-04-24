@@ -83,10 +83,28 @@ browserEvents.Equals.onEvent(browserEvents.KeyEvent.Pressed, function () {
 browserEvents.Hyphen.onEvent(browserEvents.KeyEvent.Pressed, function () {
     setRotationSpeed(rotationSpeed - 1)
 })
-controller.combos.attachCombo("up+down", function () {
-    pause(200)
-    setRotationSpeed(game.askForNumber("Rotation speed 1-10", 2))
-})
+scene.systemMenu.addEntry(
+    () => "Rotation speed: " + rotationSpeed,
+    () => setRotationSpeed(game.askForNumber("Rotation speed 1-10", 2)),
+    img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . 1 1 1 1 . . . . . . .
+        . . . 1 1 . . . . 1 1 . . . . .
+        . . 1 . . . . . . . . 1 . . . .
+        . 1 . . . . 1 . . . . . 1 . . .
+        . 1 . . . 1 1 . . . . . 1 . . .
+        . 1 . 1 1 1 1 1 1 1 1 . 1 . . .
+        . 1 . . . . 1 1 . . . . 1 . . .
+        . 1 . . . . . 1 . . . . 1 . . .
+        . . 1 . . . . . . . . 1 . . . .
+        . . . 1 1 . . . . 1 1 . . . . .
+        . . . . . 1 1 1 1 . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `
+)
 controller.combos.attachCombo("a+b", function () {
     pause(200)
     selected_book = game.askForNumber("Počet knih: " + book_level, 1)
