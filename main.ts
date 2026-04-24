@@ -44,6 +44,29 @@ browserEvents.MouseRight.onEvent(browserEvents.MouseButtonEvent.Pressed, functio
 browserEvents.MouseAny.onEvent(browserEvents.MouseButtonEvent.Released, function () {
     recordLocation()
 })
+let mouseTurnEnabled = true
+let lastMouseX = -9999
+const mouseTurnSensitivity = 0.35
+browserEvents.onMouseMove(function (x: number, y: number) {
+    if (!mouseTurnEnabled) {
+        lastMouseX = x
+        return
+    }
+    if (lastMouseX > -9000) {
+        const dx = x - lastMouseX
+        if (dx != 0) {
+            const dirX = Render.getAttribute(Render.attribute.dirX)
+            const dirY = Render.getAttribute(Render.attribute.dirY)
+            const currentDeg = Math.atan2(dirY, dirX) * 180 / Math.PI
+            Render.setViewAngleInDegree(currentDeg + dx * mouseTurnSensitivity)
+        }
+    }
+    lastMouseX = x
+})
+browserEvents.M.onEvent(browserEvents.KeyEvent.Pressed, function () {
+    mouseTurnEnabled = !mouseTurnEnabled
+    game.splash(mouseTurnEnabled ? "Mouse turn: ON" : "Mouse turn: OFF")
+})
 controller.combos.attachCombo("a+b", function () {
     pause(200)
     selected_book = game.askForNumber("Počet knih: " + book_level, 1)
