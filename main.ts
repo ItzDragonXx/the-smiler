@@ -1089,6 +1089,9 @@ forever(function () {
             potion2 = null
         }
         let potionLocs = tiles.getTilesByType(assets.tile`myTile21`)
+        while (potionLocs.length > 6) {
+            potionLocs.splice(randint(0, potionLocs.length - 1), 1)
+        }
         for (let pi = 0; pi < potionLocs.length; pi++) {
             let p = sprites.create(img`
                 . . . . . .
