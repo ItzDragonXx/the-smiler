@@ -21,88 +21,7 @@ controller.anyButton.onEvent(ControllerButtonEvent.Released, function () {
 controller.combos.attachCombo("a+b", function () {
     pause(200)
     selected_book = game.askForNumber("Počet knih: " + book_level, 1)
-    game.setDialogFrame(img`
-        eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
-        eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
-        eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
-        eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
-        eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
-        cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-        ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-        cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
-        eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
-        eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
-        eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
-        eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
-        eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
-        `)
+    game.setDialogFrame(bookFrame)
     game.setDialogTextColor(15)
     if (selected_book <= book_level) {
         if (selected_book == 1) {
@@ -272,24 +191,7 @@ controller.combos.attachCombo("a+b", function () {
         game.splash("Tuto knihu jsi ještě nenašel.")
     }
     game.setDialogTextColor(1)
-    game.setDialogCursor(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . 1 1 1 . . . . . . 1 1 1 . . 
-        . . 1 d 1 . . . . . . 1 d 1 . . 
-        . . 1 1 1 . . . . . . 1 1 1 . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . 1 . 
-        . . 1 . . . . . . . . . . 1 1 . 
-        . . 1 1 . . . . . . . 1 1 1 1 . 
-        . . 1 1 2 . . . . . . 1 1 1 . . 
-        . . 1 1 2 1 1 . . . . 1 1 2 . . 
-        . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-        . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-        . . . 2 2 . . . . . 2 . . 2 . . 
-        . . . . 2 . . . . 2 2 . . 2 . . 
-        `)
+    game.setDialogCursor(smilerImg)
     game.setDialogFrame(img`
         . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . 
@@ -544,160 +446,7 @@ let seeker = sprites.create(img`
     . . . . . . . 1 1 . . . . . . . 
     . . . . . . . 1 2 . . . . . . . 
     `, SpriteKind.Player)
-Render.setSpriteAnimations(smiler, Render.createAnimations(50, [img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 2 2 2 . . . . . . 2 2 2 . . 
-    . . 2 5 2 . . . . . . 2 5 2 . . 
-    . . 2 2 2 . . . . . . 2 2 2 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 2 . 
-    . . 2 . . . . . . . . . . 2 2 . 
-    . . 2 2 . . . . . . . 2 2 2 2 . 
-    . . 2 2 3 . . . . . . 2 2 2 . . 
-    . . 2 2 3 2 2 . . . . 2 2 3 . . 
-    . . . 2 3 2 2 2 2 2 3 2 3 . . . 
-    . . . 3 3 2 2 2 2 2 3 2 3 3 . . 
-    . . . 3 3 . . . . . 3 . . 3 . . 
-    . . . . 3 . . . . 3 3 . . 3 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 2 2 2 . . . . . . 2 2 2 . . 
-    . . 2 5 2 . . . . . . 2 5 2 . . 
-    . . 2 2 2 . . . . . . 2 2 2 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 2 . 
-    . . 2 . . . . . . . . . . 2 2 . 
-    . . 2 2 . . . . . . . 2 2 2 2 . 
-    . . 2 2 3 . . . . . . 2 2 2 . . 
-    . . 2 2 3 2 2 . . . . 2 2 3 . . 
-    . . . 2 3 2 2 2 2 2 3 2 3 . . . 
-    . . . 3 3 2 2 2 2 2 3 2 3 3 . . 
-    . . . 3 3 . . . . . 3 . . 3 . . 
-    . . . . 3 . . . . 3 3 . . 3 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . a a a . . . . . . a a a . . 
-    . . a e a . . . . . . a e a . . 
-    . . a a a . . . . . . a a a . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . a . 
-    . . a . . . . . . . . . . a a . 
-    . . a a . . . . . . . a a a a . 
-    . . a a 8 . . . . . . a a a . . 
-    . . a a 8 a a . . . . a a 8 . . 
-    . . . a 8 a a a a a 8 a 8 . . . 
-    . . . 8 8 a a a a a 8 a 8 8 . . 
-    . . . 8 8 . . . . . 8 . . 8 . . 
-    . . . . 8 . . . . 8 8 . . 8 . . 
-    `,img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `]))
+Render.setSpriteAnimations(smiler, Render.createAnimations(50, [smilerImg, smilerImg, smilerImg, smilerImgB, smilerImg, smilerImg, smilerImgB, smilerImgC, smilerImg]))
 Render.moveWithController(3, 4, 0)
 tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
 smiler.follow(me, 50)
@@ -809,24 +558,7 @@ color.Arcade
 game.setGameOverPlayable(true, music.createSong(assets.song`You won`), false)
 game.setGameOverScoringType(game.ScoringType.None)
 game.setDialogTextColor(2)
-game.setDialogCursor(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `)
+game.setDialogCursor(smilerImg)
 game.setDialogFrame(img`
     f f f f f f f f f f f f f f f 
     f f f f f f f f f f f f f f f 
@@ -976,6 +708,41 @@ function nearGoal(): boolean {
 function teleportSafe(): boolean {
     return game.runtime() >= potionGraceUntil && !nearGoal()
 }
+function resetLevel(lvl: number) {
+    if (lvl == 1) {
+        tiles.placeOnTile(me, tiles.getTileLocation(1, 1))
+        tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
+        Render.setViewAngleInDegree(90)
+    } else if (lvl == 2) {
+        tiles.placeOnTile(me, tiles.getTileLocation(15, 41))
+        tiles.placeOnTile(smiler, tiles.getTileLocation(5, 52))
+        tiles.placeOnTile(eye, tiles.getTileLocation(27, 40))
+        Render.setViewAngleInDegree(90)
+    } else if (lvl == 3) {
+        tiles.placeOnTile(me, tiles.getTileLocation(33, 30))
+        tiles.placeOnTile(smiler, tiles.getTileLocation(48, 17))
+        tiles.placeOnTile(eye, tiles.getTileLocation(50, 27))
+        Render.setViewAngleInDegree(270)
+    } else if (lvl == 4) {
+        tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
+        tiles.placeOnTile(smiler, tiles.getTileLocation(60, 53))
+        tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
+        Render.setViewAngleInDegree(90)
+    }
+}
+function doTeleport(c: number[], r: number[], a: number[]) {
+    music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    random = randint(0, c.length - 1)
+    tiles.placeOnTile(me, tiles.getTileLocation(c[random], r[random]))
+    Render.setViewAngleInDegree(a[random])
+}
+function startGameOver() {
+    music.setVolume(255)
+    Render.moveWithController(0, 0, 0)
+    color.RotatePalette.startScreenEffect(1000)
+    music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+    music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+}
 forever(function () {
     if (level == 1 && me.tileKindAt(TileDirection.Right, assets.tile`myTile`)) {
         color.setPalette(
@@ -983,163 +750,10 @@ forever(function () {
         )
         tiles.placeOnTile(me, tiles.getTileLocation(15, 41))
         tiles.placeOnTile(smiler, tiles.getTileLocation(5, 52))
-        eye = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Player)
+        eye = sprites.create(eyeFrameW, SpriteKind.Player)
         animation.runImageAnimation(
         eye,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 2 . . . . . . . . 
-            . . . . 2 . . 2 . . . 2 . . . . 
-            . 2 . . 2 . . 2 . . . 2 . . 2 . 
-            . . 2 . . 2 2 2 2 2 2 . . 2 . . 
-            2 . . 2 2 2 3 3 3 3 2 2 2 . . 2 
-            . 2 2 2 3 3 . . . . . . 2 2 2 . 
-            . . 2 3 . . . 2 2 . . . . 2 . . 
-            . 2 3 . . . 2 4 4 2 . . . . 2 . 
-            . 2 3 . . . 2 4 4 2 . . . . 2 . 
-            . . 2 . . . . 2 2 . . . . 2 3 . 
-            . . . 2 . . . . . . . . 2 3 . . 
-            . . . . 2 2 . . . . 2 2 3 . . . 
-            . . . . . . 2 2 2 2 3 3 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 1 . . . . . . . . 
-            . . . . 1 . . 1 . . . 1 . . . . 
-            . 1 . . 1 . . 1 . . . 1 . . 1 . 
-            . . 1 . . 1 1 1 1 1 1 . . 1 . . 
-            1 . . 1 1 1 2 2 2 2 1 1 1 . . 1 
-            . 1 1 1 2 2 . . . . . . 1 1 1 . 
-            . . 1 2 . . . 1 1 . . . . 1 . . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . 1 2 . . . 1 d d 1 . . . . 1 . 
-            . . 1 . . . . 1 1 . . . . 1 2 . 
-            . . . 1 . . . . . . . . 1 2 . . 
-            . . . . 1 1 . . . . 1 1 2 . . . 
-            . . . . . . 1 1 1 1 2 2 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 2 . . . . . . . . 
-            . . . . 2 . . 2 . . . 2 . . . . 
-            . 2 . . 2 . . 2 . . . 2 . . 2 . 
-            . . 2 . . 2 2 2 2 2 2 . . 2 . . 
-            2 . . 2 2 2 3 3 3 3 2 2 2 . . 2 
-            . 2 2 2 3 3 . . . . . . 2 2 2 . 
-            . . 2 3 . . . 2 2 . . . . 2 . . 
-            . 2 3 . . . 2 4 4 2 . . . . 2 . 
-            . 2 3 . . . 2 4 4 2 . . . . 2 . 
-            . . 2 . . . . 2 2 . . . . 2 3 . 
-            . . . 2 . . . . . . . . 2 3 . . 
-            . . . . 2 2 . . . . 2 2 3 . . . 
-            . . . . . . 2 2 2 2 3 3 . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `,img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 8 . . . . . . . . 
-            . . . . 8 . . 8 . . . 8 . . . . 
-            . 8 . . 8 . . 8 . . . 8 . . 8 . 
-            . . 8 . . 8 8 8 8 8 8 . . 8 . . 
-            8 . . 8 8 8 a a a a 8 8 8 . . 8 
-            . 8 8 8 a a . . . . . . 8 8 8 . 
-            . . 8 a . . . 8 8 . . . . 8 . . 
-            . 8 a . . . 8 6 6 8 . . . . 8 . 
-            . 8 a . . . 8 6 6 8 . . . . 8 . 
-            . . 8 . . . . 8 8 . . . . 8 a . 
-            . . . 8 . . . . . . . . 8 a . . 
-            . . . . 8 8 . . . . 8 8 a . . . 
-            . . . . . . 8 8 8 8 a a . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `],
+        [eyeFrameW, eyeFrameW, eyeFrameR, eyeFrameW, eyeFrameW, eyeFrameW, eyeFrameR, eyeFrameB],
         50,
         true
         )
@@ -1262,34 +876,10 @@ forever(function () {
         }
     }
     if (me.overlapsWith(seeker)) {
-        music.setVolume(255)
-        Render.moveWithController(0, 0, 0)
-        color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        startGameOver()
         music.setVolume(50)
         game.showLongText("GAME OVER", DialogLayout.Full)
-        if (level == 1) {
-            tiles.placeOnTile(me, tiles.getTileLocation(1, 1))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
-            Render.setViewAngleInDegree(90)
-        } else if (level == 2) {
-            tiles.placeOnTile(me, tiles.getTileLocation(15, 41))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(5, 52))
-            tiles.placeOnTile(eye, tiles.getTileLocation(27, 40))
-            Render.setViewAngleInDegree(90)
-        } else if (level == 3) {
-            tiles.placeOnTile(me, tiles.getTileLocation(33, 30))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(48, 17))
-            tiles.placeOnTile(eye, tiles.getTileLocation(50, 27))
-            info.setScore(0)
-            Render.setViewAngleInDegree(270)
-        } else if (level == 4) {
-            tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(60, 53))
-            tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
-            Render.setViewAngleInDegree(90)
-        }
+        resetLevel(level)
         color.setPalette(
         color.Arcade
         )
@@ -1311,28 +901,15 @@ forever(function () {
         let hit22 = me.tileKindAt(TileDirection.Right, tp22) || me.tileKindAt(TileDirection.Left, tp22) ||
             me.tileKindAt(TileDirection.Top, tp22) || me.tileKindAt(TileDirection.Bottom, tp22)
         if (hit4) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            random = randint(0, col.length - 1)
-            tiles.placeOnTile(me, tiles.getTileLocation(col[random], row[random]))
-            Render.setViewAngleInDegree(ang[random])
+            doTeleport(col, row, ang)
         } else if (hit12) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            random = randint(0, col2.length - 1)
-            tiles.placeOnTile(me, tiles.getTileLocation(col2[random], row2[random]))
-            Render.setViewAngleInDegree(ang2[random])
+            doTeleport(col2, row2, ang2)
         } else if (hit22) {
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 1, 5000, 255, 255, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            random = randint(0, col3.length - 1)
-            tiles.placeOnTile(me, tiles.getTileLocation(col3[random], row3[random]))
-            Render.setViewAngleInDegree(ang3[random])
+            doTeleport(col3, row3, ang3)
         }
     }
     if (me.overlapsWith(smiler)) {
-        music.setVolume(255)
-        Render.moveWithController(0, 0, 0)
-        color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        startGameOver()
         if (level == 5) {
             music.stopAllSounds()
             pause(500)
@@ -1367,37 +944,14 @@ forever(function () {
         }
         music.setVolume(50)
         info.setScore(0)
-        if (level == 1) {
-            tiles.placeOnTile(me, tiles.getTileLocation(1, 1))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(20, 22))
-            Render.setViewAngleInDegree(90)
-        } else if (level == 2) {
-            tiles.placeOnTile(me, tiles.getTileLocation(15, 41))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(5, 52))
-            tiles.placeOnTile(eye, tiles.getTileLocation(27, 40))
-            Render.setViewAngleInDegree(90)
-        } else if (level == 3) {
-            tiles.placeOnTile(me, tiles.getTileLocation(33, 30))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(48, 17))
-            tiles.placeOnTile(eye, tiles.getTileLocation(50, 27))
-            Render.setViewAngleInDegree(270)
-        } else if (level == 4) {
-            tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
-            tiles.placeOnTile(smiler, tiles.getTileLocation(60, 53))
-            tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
-            Render.setViewAngleInDegree(90)
-        }
+        resetLevel(level)
         color.setPalette(
         color.Arcade
         )
         Render.moveWithController(3, 4, 0)
     }
     if (me.overlapsWith(ball)) {
-        music.setVolume(255)
-        Render.moveWithController(0, 0, 0)
-        color.RotatePalette.startScreenEffect(1000)
-        music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-        music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+        startGameOver()
         game.showLongText("GAME OVER", DialogLayout.Full)
         music.setVolume(50)
         tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
@@ -1412,29 +966,10 @@ forever(function () {
     }
     if (level >= 2 && level < 5) {
         if (me.overlapsWith(eye)) {
-            music.setVolume(255)
-            Render.moveWithController(0, 0, 0)
-            color.RotatePalette.startScreenEffect(1000)
-            music.play(music.createSoundEffect(WaveShape.Noise, 5000, 5000, 255, 255, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
-            music.play(music.createSoundEffect(WaveShape.Sawtooth, 5000, 5000, 255, 255, 1500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.InBackground)
+            startGameOver()
             game.showLongText("GAME OVER", DialogLayout.Full)
             music.setVolume(50)
-            if (level == 2) {
-                tiles.placeOnTile(me, tiles.getTileLocation(15, 41))
-                tiles.placeOnTile(smiler, tiles.getTileLocation(5, 52))
-                tiles.placeOnTile(eye, tiles.getTileLocation(27, 40))
-                Render.setViewAngleInDegree(90)
-            } else if (level == 3) {
-                tiles.placeOnTile(me, tiles.getTileLocation(33, 30))
-                tiles.placeOnTile(smiler, tiles.getTileLocation(48, 17))
-                tiles.placeOnTile(eye, tiles.getTileLocation(50, 27))
-                Render.setViewAngleInDegree(270)
-            } else if (level == 4) {
-                tiles.placeOnTile(me, tiles.getTileLocation(33, 33))
-                tiles.placeOnTile(smiler, tiles.getTileLocation(60, 53))
-                tiles.placeOnTile(eye, tiles.getTileLocation(50, 50))
-                Render.setViewAngleInDegree(90)
-            }
+            resetLevel(level)
             color.setPalette(
             color.Arcade
             )
@@ -1449,88 +984,7 @@ forever(function () {
     if (me.overlapsWith(book)) {
         music.play(music.melodyPlayable(music.spooky), music.PlaybackMode.InBackground)
         game.setDialogTextColor(15)
-        game.setDialogFrame(img`
-            eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
-            eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
-            eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
-            eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
-            eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
-            cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-            ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
-            cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
-            eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
-            eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
-            eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
-            eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
-            eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
-            `)
+        game.setDialogFrame(bookFrame)
         if (book_level == 0) {
             game.setDialogCursor(img`
                 . . . . . . . . . . . . . . . . 
@@ -1841,24 +1295,7 @@ forever(function () {
             book_level = 8
             sprites.destroy(book)
         }
-        game.setDialogCursor(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . 1 1 1 . . . . . . 1 1 1 . . 
-            . . 1 d 1 . . . . . . 1 d 1 . . 
-            . . 1 1 1 . . . . . . 1 1 1 . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . 1 . 
-            . . 1 . . . . . . . . . . 1 1 . 
-            . . 1 1 . . . . . . . 1 1 1 1 . 
-            . . 1 1 2 . . . . . . 1 1 1 . . 
-            . . 1 1 2 1 1 . . . . 1 1 2 . . 
-            . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-            . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-            . . . 2 2 . . . . . 2 . . 2 . . 
-            . . . . 2 . . . . 2 2 . . 2 . . 
-            `)
+        game.setDialogCursor(smilerImg)
         game.setDialogFrame(img`
             f f f f f f f f f f f f f f f 
             f f f f f f f f f f f f f f f 
