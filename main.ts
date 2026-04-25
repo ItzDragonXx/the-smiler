@@ -334,24 +334,198 @@ tiles.placeOnTile(me, tiles.getTileLocation(1, 1))
 info.setScore(0)
 Render.setViewAngleInDegree(90)
 let level = 1
-smiler = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . 1 d 1 . . . . . . 1 d 1 . . 
-    . . 1 1 1 . . . . . . 1 1 1 . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . 1 . 
-    . . 1 . . . . . . . . . . 1 1 . 
-    . . 1 1 . . . . . . . 1 1 1 1 . 
-    . . 1 1 2 . . . . . . 1 1 1 . . 
-    . . 1 1 2 1 1 . . . . 1 1 2 . . 
-    . . . 1 2 1 1 1 1 1 2 1 2 . . . 
-    . . . 2 2 1 1 1 1 1 2 1 2 2 . . 
-    . . . 2 2 . . . . . 2 . . 2 . . 
-    . . . . 2 . . . . 2 2 . . 2 . . 
-    `, SpriteKind.Enemy)
+let smilerImg = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . 1 1 1 . . . . . . 1 1 1 . .
+    . . 1 d 1 . . . . . . 1 d 1 . .
+    . . 1 1 1 . . . . . . 1 1 1 . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . 1 .
+    . . 1 . . . . . . . . . . 1 1 .
+    . . 1 1 . . . . . . . 1 1 1 1 .
+    . . 1 1 2 . . . . . . 1 1 1 . .
+    . . 1 1 2 1 1 . . . . 1 1 2 . .
+    . . . 1 2 1 1 1 1 1 2 1 2 . . .
+    . . . 2 2 1 1 1 1 1 2 1 2 2 . .
+    . . . 2 2 . . . . . 2 . . 2 . .
+    . . . . 2 . . . . 2 2 . . 2 . .
+    `
+let smilerImgB = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . 2 2 2 . . . . . . 2 2 2 . .
+    . . 2 5 2 . . . . . . 2 5 2 . .
+    . . 2 2 2 . . . . . . 2 2 2 . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . 2 .
+    . . 2 . . . . . . . . . . 2 2 .
+    . . 2 2 . . . . . . . 2 2 2 2 .
+    . . 2 2 3 . . . . . . 2 2 2 . .
+    . . 2 2 3 2 2 . . . . 2 2 3 . .
+    . . . 2 3 2 2 2 2 2 3 2 3 . . .
+    . . . 3 3 2 2 2 2 2 3 2 3 3 . .
+    . . . 3 3 . . . . . 3 . . 3 . .
+    . . . . 3 . . . . 3 3 . . 3 . .
+    `
+let smilerImgC = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . a a a . . . . . . a a a . .
+    . . a e a . . . . . . a e a . .
+    . . a a a . . . . . . a a a . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . a .
+    . . a . . . . . . . . . . a a .
+    . . a a . . . . . . . a a a a .
+    . . a a 8 . . . . . . a a a . .
+    . . a a 8 a a . . . . a a 8 . .
+    . . . a 8 a a a a a 8 a 8 . . .
+    . . . 8 8 a a a a a 8 a 8 8 . .
+    . . . 8 8 . . . . . 8 . . 8 . .
+    . . . . 8 . . . . 8 8 . . 8 . .
+    `
+let eyeFrameW = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . 1 . . . . . . . .
+    . . . . 1 . . 1 . . . 1 . . . .
+    . 1 . . 1 . . 1 . . . 1 . . 1 .
+    . . 1 . . 1 1 1 1 1 1 . . 1 . .
+    1 . . 1 1 1 2 2 2 2 1 1 1 . . 1
+    . 1 1 1 2 2 . . . . . . 1 1 1 .
+    . . 1 2 . . . 1 1 . . . . 1 . .
+    . 1 2 . . . 1 d d 1 . . . . 1 .
+    . 1 2 . . . 1 d d 1 . . . . 1 .
+    . . 1 . . . . 1 1 . . . . 1 2 .
+    . . . 1 . . . . . . . . 1 2 . .
+    . . . . 1 1 . . . . 1 1 2 . . .
+    . . . . . . 1 1 1 1 2 2 . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    `
+let eyeFrameR = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . 2 . . . . . . . .
+    . . . . 2 . . 2 . . . 2 . . . .
+    . 2 . . 2 . . 2 . . . 2 . . 2 .
+    . . 2 . . 2 2 2 2 2 2 . . 2 . .
+    2 . . 2 2 2 3 3 3 3 2 2 2 . . 2
+    . 2 2 2 3 3 . . . . . . 2 2 2 .
+    . . 2 3 . . . 2 2 . . . . 2 . .
+    . 2 3 . . . 2 4 4 2 . . . . 2 .
+    . 2 3 . . . 2 4 4 2 . . . . 2 .
+    . . 2 . . . . 2 2 . . . . 2 3 .
+    . . . 2 . . . . . . . . 2 3 . .
+    . . . . 2 2 . . . . 2 2 3 . . .
+    . . . . . . 2 2 2 2 3 3 . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    `
+let eyeFrameB = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . 8 . . . . . . . .
+    . . . . 8 . . 8 . . . 8 . . . .
+    . 8 . . 8 . . 8 . . . 8 . . 8 .
+    . . 8 . . 8 8 8 8 8 8 . . 8 . .
+    8 . . 8 8 8 a a a a 8 8 8 . . 8
+    . 8 8 8 a a . . . . . . 8 8 8 .
+    . . 8 a . . . 8 8 . . . . 8 . .
+    . 8 a . . . 8 6 6 8 . . . . 8 .
+    . 8 a . . . 8 6 6 8 . . . . 8 .
+    . . 8 . . . . 8 8 . . . . 8 a .
+    . . . 8 . . . . . . . . 8 a . .
+    . . . . 8 8 . . . . 8 8 a . . .
+    . . . . . . 8 8 8 8 a a . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    `
+let bookFrame = img`
+    eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
+    eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
+    eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
+    eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
+    eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
+    cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
+    ecdbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdce
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    cedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdec
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    eedbdbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdbdee
+    cedbdbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdbdec
+    eedbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbdee
+    eedbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdee
+    eeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddee
+    eeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeecee
+    eeeeeeeeeeeeeeeceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeceeeeeeeeeeeeeee
+    `
+smiler = sprites.create(smilerImg, SpriteKind.Enemy)
 let seeker = sprites.create(img`
     1 1 1 1 1 1 1 . . 1 1 1 1 1 1 1 
     2 2 2 2 2 1 1 . . 1 1 2 2 2 2 2 
